@@ -12,7 +12,7 @@ import (
 	"github.com/metacubex/mihomo/constant/features"
 )
 
-const Name = "mihomo"
+const Name = "goblin"
 
 var (
 	GeositeName = "GeoSite.dat"
