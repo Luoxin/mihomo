@@ -31,6 +31,8 @@ type TrackerInfo struct {
 	Chain         C.Chain      `json:"chains"`
 	Rule          string       `json:"rule"`
 	RulePayload   string       `json:"rulePayload"`
+
+	Process string `json:"process"`
 }
 
 type tcpTracker struct {
@@ -147,6 +149,8 @@ func NewTCPTracker(conn C.Conn, manager *Manager, metadata *C.Metadata, rule C.R
 			Rule:          "",
 			UploadTotal:   atomic.NewInt64(uploadTotal),
 			DownloadTotal: atomic.NewInt64(downloadTotal),
+
+			Process: metadata.Process,
 		},
 		pushToManager: pushToManager,
 	}
