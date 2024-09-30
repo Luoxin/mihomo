@@ -383,7 +383,7 @@ func handleUDPConn(packet C.PacketAdapter) {
 	}
 
 	key := packet.Key()
-	sender, loaded := natTable.GetOrCreate(key, newPacketSender)
+	sender, loaded := natTable.GetOrCreate(key, NewPacketSender)
 	if !loaded {
 		dial := func() (C.PacketConn, C.WriteBackProxy, error) {
 			if err := sender.ResolveUDP(metadata); err != nil {

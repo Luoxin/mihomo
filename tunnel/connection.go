@@ -21,9 +21,9 @@ type packetSender struct {
 	cache  *lru.LruCache[string, netip.Addr]
 }
 
-// newPacketSender return a chan based C.PacketSender
+// NewPacketSender return a chan based C.PacketSender
 // It ensures that packets can be sent sequentially and without blocking
-func newPacketSender() C.PacketSender {
+func NewPacketSender() C.PacketSender {
 	ctx, cancel := context.WithCancel(context.Background())
 	ch := make(chan C.PacketAdapter, senderCapacity)
 	return &packetSender{
