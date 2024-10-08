@@ -158,9 +158,10 @@ type Metadata struct {
 	// Only domain rule
 	SniffHost string `json:"sniffHost"`
 
-	DstCountry string `json:"dstCountry"`
-	DstAsnOrg  string `json:"dstAsnOrg"`
-	DstAsn     uint64 `json:"dstAs"`
+	DstCountry string       `json:"dstCountry"`
+	DstAsnOrg  string       `json:"dstAsnOrg"`
+	DstAsn     uint64       `json:"dstAs"`
+	DstIps     []netip.Addr `json:"dstIps"`
 }
 
 func (m *Metadata) RemoteAddress() string {
