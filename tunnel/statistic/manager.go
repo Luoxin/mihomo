@@ -13,17 +13,7 @@ import (
 var DefaultManager *Manager
 
 func init() {
-	DefaultManager = &Manager{
-		connections:   xsync.NewMapOf[string, Tracker](),
-		uploadTemp:    atomic.NewInt64(0),
-		downloadTemp:  atomic.NewInt64(0),
-		uploadBlip:    atomic.NewInt64(0),
-		downloadBlip:  atomic.NewInt64(0),
-		uploadTotal:   atomic.NewInt64(0),
-		downloadTotal: atomic.NewInt64(0),
-		process:       &process.Process{Pid: int32(os.Getpid())},
-	}
-
+	DefaultManager = NewManager()
 	go DefaultManager.handle()
 }
 
@@ -37,6 +27,19 @@ type Manager struct {
 	downloadTotal atomic.Int64
 	process       *process.Process
 	memory        uint64
+}
+
+func NewManager() *Manager {
+	return &Manager{
+		connections:   xsync.NewMapOf[string, Tracker](),
+		uploadTemp:    atomic.NewInt64(0),
+		downloadTemp:  atomic.NewInt64(0),
+		uploadBlip:    atomic.NewInt64(0),
+		downloadBlip:  atomic.NewInt64(0),
+		uploadTotal:   atomic.NewInt64(0),
+		downloadTotal: atomic.NewInt64(0),
+		process:       &process.Process{Pid: int32(os.Getpid())},
+	}
 }
 
 func (m *Manager) Join(c Tracker) {
